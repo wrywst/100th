@@ -1,16 +1,16 @@
 var rnd = Math.random,
   flr = Math.floor;
 
-let canvas = document.createElement('canvas');
-document.getElementById('hb-wrapper').appendChild(canvas);
-canvas.style.position = 'absolute';
-canvas.style.width = '100%';
-canvas.style.height = '100%';
+let canvas = document.createElement("canvas");
+document.getElementById("hb-wrapper").appendChild(canvas);
+canvas.style.position = "absolute";
+canvas.style.width = "100%";
+canvas.style.height = "100%";
 
 canvas.width = canvas.clientWidth;
 canvas.height = canvas.clientHeight;
 
-let ctx = canvas.getContext('2d');
+let ctx = canvas.getContext("2d");
 
 function rndNum(num) {
   return rnd() * num + 1;
@@ -20,10 +20,10 @@ function vector(x, y) {
   this.x = x;
   this.y = y;
 
-  this.add = function(vec2) {
+  this.add = function (vec2) {
     this.x = this.x + vec2.x;
     this.y = this.y + vec2.y;
-  }
+  };
 }
 
 function particle(pos, vel) {
@@ -32,7 +32,7 @@ function particle(pos, vel) {
   this.dead = false;
   this.start = 0;
 
-  this.update = function(time) {
+  this.update = function (time) {
     let timeSpan = time - this.start;
 
     if (timeSpan > 500) {
@@ -45,19 +45,17 @@ function particle(pos, vel) {
     }
   };
 
-  this.draw = function() {
+  this.draw = function () {
     if (!this.dead) {
       drawDot(this.pos.x, this.pos.y, 1);
     }
-  }
-
+  };
 }
 
 function firework(x, y) {
-
   this.pos = new vector(x, y);
   this.vel = new vector(0, -rndNum(10) - 3);
-  this.color = 'hsl(' + rndNum(360) + ', 100%, 50%)'
+  this.color = "hsl(" + rndNum(360) + ", 100%, 50%)";
   this.size = 4;
   this.dead = false;
   this.start = 0;
@@ -66,7 +64,7 @@ function firework(x, y) {
 
   let rootShow = true;
 
-  this.update = function(time) {
+  this.update = function (time) {
     if (this.dead) {
       return;
     }
@@ -80,7 +78,9 @@ function firework(x, y) {
       if (exParticles.length === 0) {
         flash = true;
         for (let i = 0; i < exPLen; i++) {
-          exParticles.push(new particle(this.pos, new vector(-rndNum(10) + 5, -rndNum(10) + 5)));
+          exParticles.push(
+            new particle(this.pos, new vector(-rndNum(10) + 5, -rndNum(10) + 5))
+          );
           exParticles[exParticles.length - 1].start = time;
         }
       }
@@ -96,11 +96,10 @@ function firework(x, y) {
       if (numOfDead === exPLen) {
         this.dead = true;
       }
-
     }
-  }
+  };
 
-  this.draw = function() {
+  this.draw = function () {
     if (this.dead) {
       return;
     }
@@ -114,8 +113,7 @@ function firework(x, y) {
         p.draw();
       }
     }
-  }
-
+  };
 }
 
 function drawDot(x, y, size) {
@@ -149,20 +147,20 @@ function update(time) {
 function draw(time) {
   update(time);
 
-  ctx.fillStyle = 'rgba(255,255,255,0.3)';
+  ctx.fillStyle = "rgba(255,255,255,0.3)";
   if (flash) {
     flash = false;
   }
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  ctx.fillStyle = 'white';
+  ctx.fillStyle = "white";
   ctx.font = "30px Arial";
   let newTime = time - snapTime;
   snapTime = time;
 
   //ctx.fillText(newTime,10,50);
 
-  ctx.fillStyle = 'blue';
+  ctx.fillStyle = "blue";
   for (let i = 0, len = fireworks.length; i < len; i++) {
     let p = fireworks[i];
     if (p.dead) {
@@ -176,7 +174,7 @@ function draw(time) {
   window.requestAnimationFrame(draw);
 }
 
-window.addEventListener('resize', function() {
+window.addEventListener("resize", function () {
   canvas.width = canvas.clientWidth;
   canvas.height = canvas.clientHeight;
 });

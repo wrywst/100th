@@ -14,17 +14,17 @@
   top: 30%;
   left: calc(50vw - 150px);
   z-index: 9999;
-  font-family: 'Cabin', sans-serif;
+  font-family: "Cabin", sans-serif;
   font-size: 3em;
-  color: #006BD3;
+  color: #006bd3;
   text-shadow: 0 0 10px #ccc;
 }
 .hb-wrapper h2 {
   position: absolute;
   top: 90%;
-  left: calc(59vw - 150px);
+  left: calc(50vw - 150px);
   z-index: 9999;
-  font-family: 'Cabin', sans-serif;
+  font-family: "Cabin", sans-serif;
   font-size: 2em;
   color: #000000;
   text-shadow: 0 0 10px #ccc;
